@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+import os
+
+user = os.getlogin();
+
+file = input('Informe o nome do arquivo SQL (dentro do diretório dump e sem extensão):\n')
+db_schema = input('Informe o Schema do PostgreSQL para importar:\n')
+
+dump_path = '/home/' + user + '/dumps/' + file + '.sql';
+
+os.system(f'cat {dump_path} | docker exec -i postgres pg_restore -U postgres -d {db_schema}')
